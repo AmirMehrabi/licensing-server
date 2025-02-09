@@ -5,6 +5,7 @@ namespace LaravelReady\LicenseServer\Support;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use GuzzleHttp\Client;
 
 use Pdp\Domain;
 use Pdp\TopLevelDomains;
@@ -46,10 +47,14 @@ class DomainSupport
             return true;
         }
 
-        $response = Http::get('https://data.iana.org/TLD/tlds-alpha-by-domain.txt');
-
-        if ($response->status() === 200) {
-            return Storage::put(self::$publicSuffixList, $response->body());
+        $client = new Client();
+        try {
+            $response = $client->request('GET', 'https://data.iana.org/TLD/tlds-alpha-by-domain.txt');
+            if ($response->getStatusCode() === 200) {
+                return Storage::put(self::$publicSuffixList, $response->getBody()->getContents());
+            }
+        } catch (\Exception $e) {
+            // Log or handle exception as needed.
         }
 
         return false;
