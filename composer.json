@@ -29,7 +29,7 @@
         "ext-intl": "*",
         "ext-json": "*",
         "illuminate/support": "^5.8",
-        "jeremykendall/php-domain-parser": "^6.3.0",
+        "jeremykendall/php-domain-parser": "^5.7.0",
         "laravel-ready/ultimate-support": "^2.0 || ^1.1"
     },
     "require-dev": {
