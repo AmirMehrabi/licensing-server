@@ -30,7 +30,7 @@
         "ext-json": "*",
         "illuminate/support": "^5.8",
         "jeremykendall/php-domain-parser": "^5.7.0",
-        "laravel-ready/ultimate-support": "^2.0 || ^1.1"
+        "amoori/ultimate-support": "*"
     },
     "require-dev": {
         "mockery/mockery": "^1.6",
