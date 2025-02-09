@@ -28,9 +28,6 @@ class CreateLsIpAddressesTable extends Migration
             Schema::create($this->table, function (Blueprint $table) {
                 $table->bigIncrements('id');
 
-                $table->foreignId('license_id')
-                    ->constrained("{$this->prefix}_licenses")
-                    ->onDelete('cascade');
 
                 $table->ipAddress('ip_address');
 

@@ -28,16 +28,6 @@ class CreateLsLicensesTable extends Migration
             Schema::create($this->table, function (Blueprint $table) {
                 $table->bigIncrements('id');
 
-                $table->foreignId('user_id')
-                    ->nullable()
-                    ->constrained('users')
-                    ->onDelete('cascade');
-
-                $table->foreignId('created_by')
-                    ->nullable()
-                    ->constrained('users')
-                    ->onDelete('cascade');
-
                 $table->string('domain', 200)->nullable()->unique();
                 $table->uuid('license_key')->unique();
                 $table->enum('status', ['active', 'inactive', 'suspended'])->default('active');

@@ -34,15 +34,6 @@ class CreateLsLicensableProductsTable extends Migration
 
                 $table->morphs('licensable');
 
-                $table->foreignId('license_id')
-                    ->nullable()
-                    ->constrained("{$this->prefix}_licenses")
-                    ->onDelete('cascade');
-
-                $table->foreignId('user_id')
-                    ->nullable()
-                    ->constrained("users")
-                    ->onDelete('cascade');
 
                 $table->timestamps();
             });
@@ -74,7 +65,6 @@ class CreateLsLicensableProductsTable extends Migration
     {
         if (Schema::hasTable($this->table)) {
             Schema::table($this->table, function (Blueprint $table) {
-                $table->dropConstrainedForeignId('license_id');
 
                 $isUniqueIndexExists = collect(DB::select("SHOW INDEXES FROM {$this->table}"))
                     ->pluck('Key_name')
