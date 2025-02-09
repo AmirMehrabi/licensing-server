@@ -39,21 +39,21 @@ class CreateLsLicensableProductsTable extends Migration
             });
         }
 
-        if (Schema::hasTable($this->table)) {
-            // add unique index for 'license_id', 'licensable_type', 'licensable_id'
-            Schema::table($this->table, function (Blueprint $table) {
-                $isUniqueIndexExists = collect(DB::select("SHOW INDEXES FROM {$this->table}"))
-                    ->pluck('Key_name')
-                    ->contains($this->uniqueIndexName);
+        // if (Schema::hasTable($this->table)) {
+        //     // add unique index for 'license_id', 'licensable_type', 'licensable_id'
+        //     Schema::table($this->table, function (Blueprint $table) {
+        //         $isUniqueIndexExists = collect(DB::select("SHOW INDEXES FROM {$this->table}"))
+        //             ->pluck('Key_name')
+        //             ->contains($this->uniqueIndexName);
 
-                if (!$isUniqueIndexExists) {
-                    $table->unique(
-                        ['license_id', 'licensable_type', 'licensable_id'],
-                        $this->uniqueIndexName
-                    );
-                }
-            });
-        }
+        //         if (!$isUniqueIndexExists) {
+        //             $table->unique(
+        //                 ['license_id', 'licensable_type', 'licensable_id'],
+        //                 $this->uniqueIndexName
+        //             );
+        //         }
+        //     });
+        // }
     }
 
     /**
