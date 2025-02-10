@@ -23,4 +23,4 @@ use Illuminate\Support\Facades\Schema;
     {
         Schema::dropIfExists('license_tokens');
     }
-};
+}
