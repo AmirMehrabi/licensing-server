@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-use Laravel\Sanctum\HasApiTokens;
 
 use LaravelReady\LicenseServer\Traits\Licensable;
 
@@ -17,7 +16,7 @@ use App\Models\User;
 
 class License extends Model
 {
-    use HasApiTokens, SoftDeletes, Licensable;
+    use SoftDeletes, Licensable;
 
     public function __construct(array $attributes = [])
     {
