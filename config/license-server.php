@@ -61,7 +61,7 @@ return [
      * Admin api middleware
      */
     'admin_api_middleware' => [
-        'auth:sanctum',
+        'auth',
         'throttle:api',
     ],
 

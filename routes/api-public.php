@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Config;
 
 use LaravelReady\LicenseServer\Http\Controllers\Api\AuthController;
 use LaravelReady\LicenseServer\Http\Controllers\Api\LicenseValidationController;
+use LaravelReady\LicenseServer\Http\Middleware\LicenseAuthMiddleware;
 
 /**
  * Public routes for License Server connector package
@@ -30,7 +31,7 @@ Route::prefix('api/license-server')
             : [LicenseValidationController::class, 'licenseValidate'];
 
         $licenseMiddlewares = [
-            'auth:sanctum',
+            LicenseAuthMiddleware::class,
             'ls-license-guard',
         ];
 
