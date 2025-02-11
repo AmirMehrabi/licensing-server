@@ -23,22 +23,23 @@ Route::prefix('api/license-server')
             Route::post('login', [AuthController::class, 'login'])->name('login');
         });
 
+        // Fetch controller from config and validate it
         $licenseController = Config::get('license-server.controllers.license_validation');
 
-        $licenseController = $licenseController && is_array($licenseController)
-            ? $licenseController
-            : [LicenseValidationController::class, 'licenseValidate'];
+        if (!$licenseController || !is_array($licenseController)) {
+            $licenseController = [LicenseValidationController::class, 'licenseValidate'];
+        }
 
         $licenseMiddlewares = [
             LicenseAuthMiddleware::class,
             'ls-license-guard',
         ];
 
-        $addionalMiddlewares = Config::get('license-server.license_middlewares', []);
+        $additionalMiddlewares = Config::get('license-server.license_middlewares', []);
 
-        if ($addionalMiddlewares && count($addionalMiddlewares)) {
-            $licenseMiddlewares = array_merge($licenseMiddlewares, $addionalMiddlewares);
+        if (!empty($additionalMiddlewares)) {
+            $licenseMiddlewares = array_merge($licenseMiddlewares, $additionalMiddlewares);
         }
 
-        Route::post('license', "LicenseValidationController@licenseValidate");
+        Route::post('license', $licenseController);
     });
