@@ -40,5 +40,5 @@ Route::prefix('api/license-server')
             $licenseMiddlewares = array_merge($licenseMiddlewares, $addionalMiddlewares);
         }
 
-        Route::post('license', $licenseController);
+        Route::post('license', "LicenseValidationController@licenseValidate");
     });
