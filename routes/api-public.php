@@ -16,7 +16,6 @@ Route::prefix('api/license-server')
     ->name('license-server.')
     ->middleware([
         'api',
-        'ls-domain-guard',
         'throttle:60,1',
     ])
     ->group(function () {
@@ -41,5 +40,5 @@ Route::prefix('api/license-server')
             $licenseMiddlewares = array_merge($licenseMiddlewares, $addionalMiddlewares);
         }
 
-        Route::middleware($licenseMiddlewares)->post('license', $licenseController);
+        Route::post('license', $licenseController);
     });
